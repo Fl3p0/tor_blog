@@ -110,109 +110,136 @@
       <div id="bluesky-post">
         Wait...
       </div>
-
       <script>
-        fetch(
-          "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed" +
-          "?actor=fl3p-xd.bsky.social&limit=10"
-        )
-        .then(response => response.json())
-        .then(data => {
+  const handle = "fl3p-xd.bsky.social";
 
-          const item = data.feed.find(
-            item => item.post.author.handle === "fl3p-xd.bsky.social"
-          );
+  Promise.all([
+    fetch(
+      "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile" +
+      "?actor=" + encodeURIComponent(handle)
+    ).then(response => response.json()),
 
-          if (!item) {
-            throw new Error("No post found");
-          }
+    fetch(
+      "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed" +
+      "?actor=" + encodeURIComponent(handle) + "&limit=20"
+    ).then(response => response.json())
+  ])
+  .then(([profile, data]) => {
 
-          const post = item.post;
+    // URI of the post currently pinned on the profile
+    const pinnedUri = profile.pinnedPost
+      ? profile.pinnedPost.uri
+      : null;
 
-          const embed = document.createElement("div");
-          embed.className = "bluesky-embed";
+    // Find the newest post that isn't the pinned post
+    const item = data.feed
+      .filter(item => item.post.author.handle === handle)
+      .filter(item => item.post.uri !== pinnedUri)
+      .sort(
+        (a, b) =>
+          new Date(b.post.record.createdAt) -
+          new Date(a.post.record.createdAt)
+      )[0];
 
-          const header = document.createElement("div");
-          header.className = "bluesky-header";
+    if (!item) {
+      throw new Error("No non-pinned post found");
+    }
 
-          const avatar = document.createElement("img");
-          avatar.className = "bluesky-avatar";
-          avatar.src = post.author.avatar;
-          avatar.alt = "";
+    const post = item.post;
 
-          const authorInfo = document.createElement("div");
+    const embed = document.createElement("div");
+    embed.className = "bluesky-embed";
 
-          const name = document.createElement("p");
-          name.className = "bluesky-name";
-          name.textContent = post.author.displayName;
+    const header = document.createElement("div");
+    header.className = "bluesky-header";
 
-          const handle = document.createElement("p");
-          handle.className = "bluesky-handle";
-          handle.textContent = "@" + post.author.handle;
+    const avatar = document.createElement("img");
+    avatar.className = "bluesky-avatar";
+    avatar.src = post.author.avatar;
+    avatar.alt = "";
 
-          authorInfo.appendChild(name);
-          authorInfo.appendChild(handle);
+    const authorInfo = document.createElement("div");
 
-          header.appendChild(avatar);
-          header.appendChild(authorInfo);
+    const name = document.createElement("p");
+    name.className = "bluesky-name";
+    name.textContent = post.author.displayName;
 
-          const text = document.createElement("div");
-          text.className = "bluesky-text";
-          text.textContent = post.record.text;
+    const handleElement = document.createElement("p");
+    handleElement.className = "bluesky-handle";
+    handleElement.textContent = "@" + post.author.handle;
 
-          const time = document.createElement("div");
-          time.className = "bluesky-time";
+    authorInfo.appendChild(name);
+    authorInfo.appendChild(handleElement);
 
-          const date = new Date(post.record.createdAt);
+    header.appendChild(avatar);
+    header.appendChild(authorInfo);
 
-          time.textContent = date.toLocaleString();
+    const text = document.createElement("div");
+    text.className = "bluesky-text";
+    text.textContent = post.record.text;
 
-          embed.appendChild(header);
-          embed.appendChild(text);
+    const time = document.createElement("div");
+    time.className = "bluesky-time";
 
-          if (
-            post.embed &&
-            post.embed.images &&
-            post.embed.images.length > 0
-          ) {
-            const image = document.createElement("img");
-            image.className = "bluesky-image";
-            image.src = post.embed.images[0].fullsize;
-            image.alt = post.embed.images[0].alt || "";
+    const date = new Date(post.record.createdAt);
+    time.textContent = date.toLocaleString();
 
-            embed.appendChild(image);
-          }
+    embed.appendChild(header);
+    embed.appendChild(text);
 
-          embed.appendChild(time);
+    if (
+      post.embed &&
+      post.embed.images &&
+      post.embed.images.length > 0
+    ) {
+      const image = document.createElement("img");
+      image.className = "bluesky-image";
+      image.src = post.embed.images[0].fullsize;
+      image.alt = post.embed.images[0].alt || "";
 
-          const rkey = post.uri.split("/").pop();
+      embed.appendChild(image);
+    }
 
-          const link = document.createElement("a");
-          link.className = "bluesky-link";
-          link.href =
-            "https://bsky.app/profile/" +
-            post.author.handle +
-            "/post/" +
-            rkey;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = "View full tweet on Bluesky -->";
+    embed.appendChild(time);
 
-          embed.appendChild(link);
+    const rkey = post.uri.split("/").pop();
 
-          const container = document.getElementById("bluesky-post");
+    const link = document.createElement("a");
+    link.className = "bluesky-link";
+    link.href =
+      "https://bsky.app/profile/" +
+      post.author.handle +
+      "/post/" +
+      rkey;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "View full tweet on Bluesky -->";
 
-          container.innerHTML = "";
-          container.appendChild(embed);
-        })
-        .catch(error => {
-          console.error(error);
+    embed.appendChild(link);
 
-          document.getElementById("bluesky-post").textContent =
-            "Unable to load Bluesky post.";
-        });
-      </script>
+    const container = document.getElementById("bluesky-post");
 
+    container.innerHTML = "";
+    container.appendChild(embed);
+  })
+  .catch(error => {
+    console.error(error);
+
+    document.getElementById("bluesky-post").textContent =
+      "Unable to load Bluesky post.";
+  });
+</script>
+
+
+   
+      <hr class="divider"></hr>
+      <div>
+        <h2>External <span class="t">Links</span>:</h2>
+          <div>
+            <h4><span class="t">Bluesky:</h4>
+
+          </div>
+      </div>
   </body>
 </html>
 
