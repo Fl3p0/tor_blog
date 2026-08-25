@@ -80,7 +80,7 @@
 
   <body>
       <div>
-       <marquee behavior="scroll" direction="left" scrollamount="50">     Hello Hola Bonjour Hallo Ciao Olá     Привет Здравствуйте Γεια σου Γεια σας 你好 您好     こんにちは やあ 안녕하세요 안녕 สวัสดี Xin chào     Chào bạn नमस्ते नमस्कार ਸਤ ਸ੍ਰੀ ਅਕਾਲ নমস্কার     السلام عليكم مرحبا שלום سلام Merhaba Selam     Привіт Вітаю Բարեւ Բարև ձեզ გამარჯობა გამარჯობათ     Ahoj Čau Dobrý deň Hej Hallå Hei     Hej Moi Tere Sveiki Labas Kaixo     Kaixo Olá Halló Hæ Goddag God morgen     Goedendag Hallo Dag Hoi Servus Grüß Gott     Szia Jó napot Cześć Dzień dobry Witaj Здравей     Добър ден Здраво Добар дан Përshëndetje Tungjatjeta Salut     Bună Добрий день Мир вам Namaste Salaam Jambo     Sawubona Molo Salam Selam aleikum Habari Karibu     Kia ora Hālo Mālō e lelei Talofa Bula Yá'át'ééh     Kwey Bonjourno Halo Kamusta Mabuhay Kumusta     Xin chào Sà-wàt-dee Suostei Mingalaba Góðan dag Shwmae </marquee>
+       <marquee behavior="scroll" direction="left" scrollamount="50">     Hello Hola Bonjour Hallo Ciao Olá     Привет Здравствуйте Γεια σου Γεια σας 你好 您好     こんにちは やあ 안녕하세요 안녕 สวัสดดี Xin chào     Chào bạn नमस्ते नमस्कार ਸਤ ਸ੍ਰੀ ਅਕਾਲ নমস্কার     السلام عليكم مرحبا שלום سلام Merhaba Selam     Привіт Вітаю Բարեւ Բարև ձեզ გამარჯობა გამარჯობათ     Ahoj Čau Dobrý deň Hej Hallå Hei     Hej Moi Tere Sveiki Labas Kaixo     Kaixo Olá Halló Hæ Goddag God morgen     Goedendag Hallo Dag Hoi Servus Grüß Gott     Szia Jó napot Cześć Dzień dobry Witaj Здравей     Добър ден Здраво Добар дан Përshëndetje Tungjatjeta Salut     Bună Добрий день Мир вам Namaste Salaam Jambo     Sawubona Molo Salam Selam aleikum Habari Karibu     Kia ora Hālo Mālō e lelei Talofa Bula Yá'át'ééh     Kwey Bonjourno Halo Kamusta Mabuhay Kumusta     Xin chào Sà-wàt-dee Suostei Mingalaba Góðan dag Shwmae </marquee>
 
        <marquee behavior="scroll" direction="right" scrollamount="50">     Hello Hola Bonjour Hallo Ciao Olá     Привет Здравствуйте Γεια σου Γεια σας 你好 您好     こんにちは やあ 안녕하세요 안녕 สวัสดดี Xin chào     Chào bạn नमस्ते नमस्कार ਸਤ ਸ੍ਰੀ ਅਕਾਲ নমস্কার     السلام عليكم مرحبا שלום سلام Merhaba Selam     Привіт Вітаю Բարեւ Բարև ձեզ გამარჯობა გამარჯობათ     Ahoj Čau Dobrý deň Hej Hallå Hei     Hej Moi Tere Sveiki Labas Kaixo     Kaixo Olá Halló Hæ Goddag God morgen     Goedendag Hallo Dag Hoi Servus Grüß Gott     Szia Jó napot Cześć Dzień dobry Witaj Здравей     Добър ден Здраво Добар дан Përshëndetje Tungjatjeta Salut     Bună Добрий день Мир вам Namaste Salaam Jambo     Sawubona Molo Salam Selam aleikum Habari Karibu     Kia ora Hālo Mālō e lelei Talofa Bula Yá'át'ééh     Kwey Bonjourno Halo Kamusta Mabuhay Kumusta     Xin chào Sà-wàt-dee Suostei Mingalaba Góðan dag Shwmae </marquee>
       <div>
@@ -126,12 +126,10 @@
   ])
   .then(([profile, data]) => {
 
-    // URI of the post currently pinned on the profile
     const pinnedUri = profile.pinnedPost
       ? profile.pinnedPost.uri
       : null;
 
-    // Find the newest post that isn't the pinned post
     const item = data.feed
       .filter(item => item.post.author.handle === handle)
       .filter(item => item.post.uri !== pinnedUri)
@@ -237,9 +235,114 @@
         <h2>External <span class="t">Links</span>:</h2>
           <div>
             <h4><span class="t">Bluesky:</h4>
+                  <div id="bluesky-post">
+        Wait...
+      </div>
+
+      <script>
+        fetch(
+          "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed" +
+          "?actor=fl3p-xd.bsky.social&limit=10"
+        )
+        .then(response => response.json())
+        .then(data => {
+
+          const item = data.feed.find(
+            item => item.post.author.handle === "fl3p-xd.bsky.social"
+          );
+
+          if (!item) {
+            throw new Error("No post found");
+          }
+
+          const post = item.post;
+
+          const embed = document.createElement("div");
+          embed.className = "bluesky-embed";
+
+          const header = document.createElement("div");
+          header.className = "bluesky-header";
+
+          const avatar = document.createElement("img");
+          avatar.className = "bluesky-avatar";
+          avatar.src = post.author.avatar;
+          avatar.alt = "";
+
+          const authorInfo = document.createElement("div");
+
+          const name = document.createElement("p");
+          name.className = "bluesky-name";
+          name.textContent = post.author.displayName;
+
+          const handle = document.createElement("p");
+          handle.className = "bluesky-handle";
+          handle.textContent = "@" + post.author.handle;
+
+          authorInfo.appendChild(name);
+          authorInfo.appendChild(handle);
+
+          header.appendChild(avatar);
+          header.appendChild(authorInfo);
+
+          const text = document.createElement("div");
+          text.className = "bluesky-text";
+          text.textContent = post.record.text;
+
+          const time = document.createElement("div");
+          time.className = "bluesky-time";
+
+          const date = new Date(post.record.createdAt);
+
+          time.textContent = date.toLocaleString();
+
+          embed.appendChild(header);
+          embed.appendChild(text);
+
+          if (
+            post.embed &&
+            post.embed.images &&
+            post.embed.images.length > 0
+          ) {
+            const image = document.createElement("img");
+            image.className = "bluesky-image";
+            image.src = post.embed.images[0].fullsize;
+            image.alt = post.embed.images[0].alt || "";
+
+            embed.appendChild(image);
+          }
+
+          embed.appendChild(time);
+
+          const rkey = post.uri.split("/").pop();
+
+          const link = document.createElement("a");
+          link.className = "bluesky-link";
+          link.href =
+            "https://bsky.app/profile/" +
+            post.author.handle +
+            "/post/" +
+            rkey;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "View full tweet on Bluesky -->";
+
+          embed.appendChild(link);
+
+          const container = document.querySelectorAll("#bluesky-post")[1];
+
+          container.innerHTML = "";
+          container.appendChild(embed);
+        })
+        .catch(error => {
+          console.error(error);
+
+          document.querySelectorAll("#bluesky-post")[1].textContent =
+            "Unable to load Bluesky post.";
+        });
+      </script>
+
 
           </div>
       </div>
   </body>
 </html>
-
