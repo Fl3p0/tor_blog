@@ -15,8 +15,44 @@
   }
 
 .blogfont {
-    font-family: "Roboto", sans-serif;
+    font-family: "Workbench", monospace;
 }
+
+.social-box{
+	float: left;
+}
+
+
+.social-icon-rounded{}
+.social-icon-rounded li{
+	display: inline-block;
+	left-margin: 50px;
+  overflow: hidden;
+}
+.social-icon-rounded li:last-child{
+	margin-right: -50;
+}
+.social-icon-rounded li a{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: bottom
+  font-size: 18px;
+	color: #53a92c;
+	border: 2px solid #53a92c;
+	border-radius: 100%;
+	overflow: hidden;
+}
+
+
+.social-icon-rounded li a:hover{
+	background: #53a92c;
+	border: 2px solid #53a92c;
+	color: #fff;
+  margin-left: 50px;
+} 
+
 
 img {
   border-radius: 12px;
@@ -25,10 +61,15 @@ img {
 }
 
 
+.mark {
+    font-family: "Workbench", monospace;
+}
+
+
 body {
   color:white;
-  font-family: "Noto Sans", sans-serif;
   background-color: #390E47;
+  font-family: "Noto Sans", sans-serif;
 }
 
 p {
@@ -53,6 +94,8 @@ p {
 
 a {
   color: red;
+  font-style: italic;
+  text-decoration: none;
 }
 
 .bold {
