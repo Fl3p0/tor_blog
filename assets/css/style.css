@@ -62,6 +62,13 @@ h1 {
 	overflow: hidden;
 }
 
+.hidden{
+    color:#EBEBBE 
+
+}
+
+
+
 
 .social-icon-rounded li a:hover{
 	background: #53a92c;
