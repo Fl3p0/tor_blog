@@ -7,6 +7,16 @@
   font-family: Georgia, "Times New Roman", serif;
 }
 
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/noto.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
 
 .blogtitleitalic {
   
@@ -15,11 +25,18 @@
   }
 
 .blogfont {
-    font-family: "Workbench", monospace;
+    font-family: "Courier New", Courier, monospace;
 }
 
 .social-box{
 	float: left;
+}
+
+
+
+h1 {
+
+  font-family: "Courier New",Courier, monospace;
 }
 
 
@@ -67,8 +84,9 @@ img {
 
 
 body {
-  color:white;
-  background-color: #390E47;
+  color:black;
+  font-size: 14px;
+  background-color: #EBEBBE;
   font-family: "Noto Sans", sans-serif;
 }
 
@@ -93,7 +111,7 @@ p {
 }
 
 a {
-  color: red;
+  color: #56821c;
   font-style: italic;
   text-decoration: none;
 }
@@ -111,6 +129,17 @@ a {
 
   color: #C011F7;
 }
+
+.blogo {
+    width: 100px;
+    height: 15px;
+}
+
+
+
+
+
+
 
 .header {
   background-color: #f1f1f1;

@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+}
+
+.blogtitle {
+
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/noto.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+
+.blogtitleitalic {
+  
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  }
+
+.blogfont {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.social-box{
+	float: left;
+}
+
+
+
+h1 {
+
+  font-family: "Courier New",Courier, monospace;
+}
+
+
+.social-icon-rounded{}
+.social-icon-rounded li{
+	display: inline-block;
+	left-margin: 50px;
+  overflow: hidden;
+}
+.social-icon-rounded li:last-child{
+	margin-right: -50;
+}
+.social-icon-rounded li a{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: bottom
+  font-size: 18px;
+	color: #53a92c;
+	border: 2px solid #53a92c;
+	border-radius: 100%;
+	overflow: hidden;
+}
+
+
+.social-icon-rounded li a:hover{
+	background: #53a92c;
+	border: 2px solid #53a92c;
+	color: #fff;
+  margin-left: 50px;
+} 
+
+
+img {
+  border-radius: 12px;
+  left-margin: 0px;
+  right-margin: 0px;
+}
+
+
+.mark {
+    font-family: "Workbench", monospace;
+}
+
+
+.angel{
+  margin: 0 auto
+  display: flex; justify-content: center; align-items: center
+}
+
+
+body {
+  color:white;
+  font-size: 14px;
+  background-color: black;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+p {
+  font-size: 16px;
+}
+
+.alarm {
+  font-size: 16px;
+  color: red;
+  font-style: italic;
+}
+
+.t {
+  color: #6276F9;
+
+}
+
+
+.red {
+  color: red;
+}
+
+a {
+  color: #56821c;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.b {
+  font-style: bold;
+
+}
+
+.italic {
+  font-style: italic;
+}
+
+.tor {
+
+  color: #C011F7;
+}
+
+.blogo {
+    width: 100px;
+    height: 15px;
+}
+
+
+
+
+
+
+
+.header {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+}
+
+.row {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.column {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 10px;
+}
+
+
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
