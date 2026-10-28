@@ -63,12 +63,45 @@ h1 {
 }
 
 .hidden{
-    color:#EBEBBE 
-
+   /* color:#EBEBBE */ 
+    color: black;
 }
 
 
+.cenmgwt{
+  color:white;
+  font-size: 14px;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
 
+
+.shcen{
+  color:white;
+  font-size: 14px;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.cen{
+  color:white;
+  font-size: 14px;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
 
 .social-icon-rounded li a:hover{
 	background: #53a92c;
@@ -77,12 +110,18 @@ h1 {
   margin-left: 50px;
 } 
 
+ .badge {
+  width: 80px;
+  height: 15px;
+  left-margin: 900;
+}
+
 
 img {
-  border-radius: 12px;
   left-margin: 0px;
   right-margin: 0px;
 }
+
 
 
 .mark {
@@ -91,14 +130,16 @@ img {
 
 
 body {
-  color:black;
+  color:white;
   font-size: 14px;
-  background-color: #EBEBBE;
+  /*background-color: #EBEBBE; */
+  background-image: url(../images/stars.jpg);
   font-family: "Noto Sans", sans-serif;
 }
 
 p {
   font-size: 16px;
+  font-family: monospace;
 }
 
 .alarm {

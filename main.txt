@@ -1,0 +1,50 @@
+From 756f6257499eabed32d451c8113026d7197ced9f Mon Sep 17 00:00:00 2001
+From: Fl3p <FFl3po@proton.me>
+Date: Sat, 17 Oct 2026 19:45:05 -0500
+Subject: [PATCH] casdergtytresw
+
+Hey there flip!
+Please consider making these changes:
+
+
+---
+ assets/css/style.css | 7 +++++++
+ index.html           | 5 +++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/assets/css/style.css b/assets/css/style.css
+index 3d4f924..611ce43 100644
+--- a/assets/css/style.css
++++ b/assets/css/style.css
+@@ -62,6 +62,13 @@ h1 {
+ 	overflow: hidden;
+ }
+ 
++.hidden{
++    color:#EBEBBE 
++
++}
++
++
++
+ 
+ .social-icon-rounded li a:hover{
+ 	background: #53a92c;
+diff --git a/index.html b/index.html
+index 6b48989..a039cdf 100644
+--- a/index.html
++++ b/index.html
+@@ -68,7 +68,8 @@
+       </div>
+          <a href="https://bsky.app/profile/fl3p-xd.bsky.social" target="_blank" ><span class="t">Bluesky</span></p>
+          <a href="https://github.com/Fl3p0" target="_blank"><span>Github</span>
+-         <a href="./hidden.html" target="_blank">A hidden corner you never saw before...</a>
+-      </div>
++         <br> <br> 
++        <a href="./hidden.html" class="hidden" target="_blank">A hidden corner you never saw before...</a>
++      </br>
+     </footer>
+ </html>
+-- 
+2.56.0
+
